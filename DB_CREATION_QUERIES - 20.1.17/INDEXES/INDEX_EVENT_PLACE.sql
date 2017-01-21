@@ -1,0 +1,1 @@
+CREATE INDEX eventPlacePlaceIDIndex ON Event_Place(place_id);

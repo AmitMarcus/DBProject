@@ -4,6 +4,6 @@ CREATE TABLE Owner
 	name VARCHAR(27) NOT NULL,
 	PRIMARY KEY (id)
 )
-COLLATE='utf8_general_ci'
+COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM
 ;

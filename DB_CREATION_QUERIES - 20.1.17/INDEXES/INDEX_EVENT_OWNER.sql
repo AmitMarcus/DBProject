@@ -1,0 +1,1 @@
+CREATE INDEX eventOwnerOwnerIDIndex ON Event_Owner(owner_id);
