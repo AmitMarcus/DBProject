@@ -9,7 +9,7 @@ CREATE TABLE Comment
 	FOREIGN KEY (event_id)
 		REFERENCES Event(id),
 
-	CHECK (updated_time < CURTIME())
+	CHECK (updated_time <= CURTIME())
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

@@ -10,8 +10,8 @@ CREATE TABLE Event_Time
 		REFERENCES Event(id),
 	FOREIGN KEY (timezone_id)
 		REFERENCES Timezone(id),
-	CHECK (update_time < CURTIME()),
-	CHECK (end_time > start_time)
+	CHECK (update_time <= CURTIME()),
+	CHECK (end_time >= start_time)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

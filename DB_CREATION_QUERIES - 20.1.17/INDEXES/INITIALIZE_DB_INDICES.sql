@@ -17,7 +17,7 @@ CREATE INDEX ownerIdIndex ON Owner(id);
 
 CREATE INDEX eventIdIndex ON Event(id);
 CREATE INDEX eventCategoryIDIndex ON Event(category_id);
-CREATE FULLTEXT INDEX FullTextSearchIndex (description);
+CREATE FULLTEXT INDEX FullTextSearchIndex ON Event(description);
 
 CREATE INDEX eventGuestsIdIndex ON Event_Guests(event_id);
 CREATE INDEX eventGuestsAttendingCountIndex ON Event_Guests(attending_count);

@@ -8,7 +8,12 @@ CREATE TABLE Event_Guests
 	noreply_count MEDIUMINT(8)  NOT NULL,
 	PRIMARY KEY (event_id),
 	FOREIGN KEY (event_id)
-		REFERENCES Event(id)
+		REFERENCES Event(id),
+	CHECK (attending_count >= 0),
+	CHECK (declined_count >= 0),
+	CHECK (maybe_count >= 0),
+	CHECK (interested_count >= 0),
+	CHECK (noreply_count >= 0)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM
