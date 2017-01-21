@@ -2,3 +2,6 @@
 UPDATED_BUILD_DB/DATA_FROM_API/.idea/DATA_FROM_API.iml
 *.xml
 UPDATED_BUILD_DB/DATA_FROM_API/sandbox.py
+build_db/data_from_api/.idea/DATA_FROM_API.iml
+*.pyc
+build_db/data_from_api/sandbox.py
