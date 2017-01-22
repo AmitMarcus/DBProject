@@ -5,7 +5,9 @@ CREATE TABLE Event_Place (
 	FOREIGN KEY (event_id)
 		REFERENCES Event(id),
 	FOREIGN KEY (place_id)
-		REFERENCES Place(id)
+		REFERENCES Place(id),
+	CHECK (event_id > -1),
+	CHECK (place_id > -1)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

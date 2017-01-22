@@ -66,6 +66,10 @@ def execute_update_query(event_id, event_attending_count, event_declined_count, 
         print("Skipping duplicate Event-Guest entry: " + str(event_id))
     except MySQLdb.OperationalError:
         pass  # Silently ignore constraint errors, this is the database protecting against bad FB records..
+    except Exception:
+        con.rollback()  # Any other exception should be rolled back to protect DB integrity
+
+    con.close()
 
 
 def update_event_guests(event_id):

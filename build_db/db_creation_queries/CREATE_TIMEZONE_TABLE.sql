@@ -1,8 +1,9 @@
 CREATE TABLE Timezone 
 (
 	id MEDIUMINT(10) NOT NULL AUTO_INCREMENT,
-	timezone VARCHAR(40) NOT NULL COLLATE 'utf8_general_ci',
-	PRIMARY KEY (id)
+	timezone VARCHAR(40) NOT NULL,
+	PRIMARY KEY (id),
+	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

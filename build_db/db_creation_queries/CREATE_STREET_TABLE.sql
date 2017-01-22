@@ -5,7 +5,9 @@ CREATE TABLE Street
 	city_id MEDIUMINT(10) NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (city_id)
-		REFERENCES City(id)
+		REFERENCES City(id),
+	CHECK (id > -1),
+	CHECK (city_id > -1)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

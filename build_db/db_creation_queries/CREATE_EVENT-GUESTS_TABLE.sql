@@ -13,7 +13,8 @@ CREATE TABLE Event_Guests
 	CHECK (declined_count >= 0),
 	CHECK (maybe_count >= 0),
 	CHECK (interested_count >= 0),
-	CHECK (noreply_count >= 0)
+	CHECK (noreply_count >= 0),
+	CHECK (event_id > -1)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=MyISAM

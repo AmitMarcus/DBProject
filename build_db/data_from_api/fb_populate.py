@@ -589,6 +589,7 @@ def commit_dictionaries_to_db():
 
     # Connect to Database..
     con = MySQLdb.connect(database_hostname, 'DbMysql08', 'DbMysql08', 'DbMysql08', charset='utf8')
+    con.autocommit(False)
     with con:
 
         # ================================================================
@@ -675,4 +676,5 @@ def commit_dictionaries_to_db():
             tb = traceback.format_exc()
             print(tb)
 
+        con.close()
         print('Database population process done!')

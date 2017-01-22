@@ -23,6 +23,7 @@ def populate_db():
     # Connect to Database - we test the connection as early as possible.
     # If there are connection problems we want to quit as early as possible in the process..
     con = MySQLdb.connect(database_hostname, 'DbMysql08', 'DbMysql08', 'DbMysql08', charset='utf8')
+    con.close()
     con = None
 
     # We support insertion of multiple download processes at once.
