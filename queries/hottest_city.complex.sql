@@ -3,7 +3,7 @@ SELECT
     Event.id AS event_id,
     Event.name AS event_name,
     Category.name AS event_category,
-    Event.description AS event_description,
+    Event_Desc_Search.description AS event_description,
     DATE_FORMAT(Event_Time.start_time, '%e/%c/%Y %H:%i') AS event_start_time,
     DATE_FORMAT(Event_Time.end_time, '%e/%c/%Y %H:%i') AS event_end_time
 FROM
@@ -14,6 +14,7 @@ FROM
     Place,
     Event_Place,
     Event_Time,
+    Event_Desc_Search,
     (SELECT 
         City1.id AS CityId1, COUNT(Event1.id) AS Num_Of_Events
     FROM
@@ -35,5 +36,6 @@ WHERE
         AND City.id = CityMaxEventsTable.CityId1
         AND Event.id = Event_Time.event_id
         AND Event_Time.start_time >= CURDATE()
+        AND Event.id = Event_Desc_Search.event_id
 ORDER BY (Event_Time.start_time)
 LIMIT 10;
