@@ -1,7 +1,7 @@
 CREATE TABLE Event_Time 
 (
 	event_id BIGINT(20) NOT NULL,
-	timezone_id MEDIUMINT(10)  DEFAULT NULL,
+	timezone_id MEDIUMINT(8)  DEFAULT NULL,
 	start_time DATETIME  NOT NULL,
 	end_time DATETIME  NOT NULL,
 	update_time DATETIME  DEFAULT NULL,

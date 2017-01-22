@@ -3,7 +3,7 @@ CREATE TABLE Event (
 	name VARCHAR(100)  NOT NULL,
 	is_canceled Tinyint(1)  DEFAULT 0,
 	description VARCHAR(700)  DEFAULT NULL,
-	category_id INT(5)  DEFAULT 999,
+	category_id SMALLINT(5)  DEFAULT 999,
 	can_guest_invite Tinyint(1)  DEFAULT 0,
 	cover_source VARCHAR(255)  DEFAULT NULL,
 	event_ticket_uri VARCHAR(600) DEFAULT NULL,
