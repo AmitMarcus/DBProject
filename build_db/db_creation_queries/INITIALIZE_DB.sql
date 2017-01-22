@@ -27,7 +27,7 @@ CREATE TABLE Category
 	PRIMARY KEY (id)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM;
+ENGINE='InnoDB';
 
 CREATE TABLE Timezone 
 (
@@ -37,7 +37,7 @@ CREATE TABLE Timezone
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Country 
@@ -48,7 +48,7 @@ CREATE TABLE Country
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE City 
@@ -63,7 +63,7 @@ CREATE TABLE City
 	CHECK (country_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Street 
@@ -78,7 +78,7 @@ CREATE TABLE Street
 	CHECK (city_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Place 
@@ -94,7 +94,7 @@ CREATE TABLE Place
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Owner 
@@ -105,14 +105,13 @@ CREATE TABLE Owner
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event (
 	id BIGINT(20) NOT NULL,
 	name VARCHAR(100)  NOT NULL,
 	is_canceled Tinyint(1)  DEFAULT 0,
-	description VARCHAR(700)  DEFAULT NULL,
 	category_id SMALLINT(5)  DEFAULT 999,
 	can_guest_invite Tinyint(1)  DEFAULT 0,
 	cover_source VARCHAR(255)  DEFAULT NULL,
@@ -125,7 +124,7 @@ CREATE TABLE Event (
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event_Guests
@@ -147,7 +146,7 @@ CREATE TABLE Event_Guests
 	CHECK (event_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event_Time 
@@ -167,7 +166,7 @@ CREATE TABLE Event_Time
 	CHECK (event_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event_Owner (
@@ -182,7 +181,7 @@ CREATE TABLE Event_Owner (
 	CHECK (owner_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event_Place (
@@ -197,7 +196,17 @@ CREATE TABLE Event_Place (
 	CHECK (place_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
+;
+
+CREATE TABLE Event_Desc_Search (
+	id BIGINT(20) NOT NULL,
+	description VARCHAR(700)  DEFAULT NULL,
+	PRIMARY KEY (id),
+	CHECK (id > -1)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE='MyISAM'
 ;
 
 CREATE TABLE Comment 
@@ -214,5 +223,5 @@ CREATE TABLE Comment
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
