@@ -2,11 +2,12 @@ SELECT
     Event.id AS event_id,
     Event.name AS event_name,
     Category.name AS event_category,
-    Event.description AS event_description
+    Event_Desc_Search.description AS event_description
 FROM
     Event,
     Category,
     Event_Time,
+    Event_Desc_Search,
     (SELECT 
         MIN(Event2.id) AS Newest_Event_ID
     FROM
@@ -28,4 +29,5 @@ FROM
 WHERE
     Event.id = EventIDS.Newest_Event_ID
         AND Event.category_id = Category.id
-        AND Event.id = Event_Time.event_id;
+        AND Event.id = Event_Time.event_id
+        AND Event.id = Event_Desc_Search.event_id;
