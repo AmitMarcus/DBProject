@@ -7,7 +7,7 @@ mouse.config(function ($routeProvider, $locationProvider) {
             controller: 'query',
             resolve: {
                 queryName: function ($route) {
-                    $route.current.params.queryName = "mosaic";
+                    $route.current.params.queryName = "mosaic.complex";
                 }
             }
         })
@@ -16,16 +16,25 @@ mouse.config(function ($routeProvider, $locationProvider) {
             controller: 'query',
             resolve: {
                 queryName: function ($route) {
-                    $route.current.params.queryName = "hottest_city";
+                    $route.current.params.queryName = "hottest_city.complex";
                 }
             }
         })
-        .when('/highest_attending/', {
-            templateUrl: 'views/highest_attending.html',
+        .when('/hottest_season/', {
+            templateUrl: 'views/hottest_season.html',
             controller: 'query',
             resolve: {
                 queryName: function ($route) {
-                    $route.current.params.queryName = "highest_attending";
+                    $route.current.params.queryName = "hottest_season.complex";
+                }
+            }
+        })
+        .when('/most_popular_owners/', {
+            templateUrl: 'views/most_popular_owners.html',
+            controller: 'query',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "most_popular_owners.complex";
                 }
             }
         })

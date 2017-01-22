@@ -1,0 +1,1 @@
+INSERT INTO Comment (message, event_id) VALUES (%s, %s)

@@ -1,5 +1,5 @@
-<h2>Highest Attending</h2>
-<h4>All events occuring in the same city and at the same month as the highest attending event.</h4>
+<h2>Hottest Season</h2>
+<h4>All events in hottest season in the city of the biggest event.</h4>
 <br>
 <table class="table table-hover">
     <thead>
@@ -9,6 +9,8 @@
             <th>Category</th>
             <th>Start Time</th>
             <th>End Time</th>
+            <th>City</th>
+            <th>Attending</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +20,8 @@
             <td>{{event.event_category}}</td>
             <td>{{event.event_start_time}}</td>
             <td>{{event.event_end_time}}</td>
+            <td>{{event.city_name}}</td>
+            <td>{{event.event_attending_count}}</td>
         </tr>
     </tbody>
 </table>
