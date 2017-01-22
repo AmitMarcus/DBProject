@@ -162,7 +162,7 @@ CREATE TABLE Event_Time
 		REFERENCES Event(id),
 	FOREIGN KEY (timezone_id)
 		REFERENCES Timezone(id),
-	CHECK (update_time <= CURTIME()),
+	CHECK (update_time <= NOW()),
 	CHECK (end_time >= start_time),
 	CHECK (event_id > -1)
 )
@@ -204,13 +204,13 @@ CREATE TABLE Comment
 (
 	id BIGINT(20) NOT NULL AUTO_INCREMENT,
 	message VARCHAR(700) NOT NULL,
-	updated_time DATETIME DEFAULT NULL,
+	updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	event_id BIGINT(20) NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (event_id)
 		REFERENCES Event(id),
 
-	CHECK (updated_time <= CURTIME()),
+	CHECK (updated_time <= NOW()),
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
