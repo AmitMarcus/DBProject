@@ -12,5 +12,5 @@ CREATE TABLE Comment
 	CHECK (id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;

@@ -1,1 +1,0 @@
-CREATE INDEX countryIDIndex ON Country(id);

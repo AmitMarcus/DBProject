@@ -1,1 +1,0 @@
-CREATE INDEX categoryIdIndex ON Category(id);

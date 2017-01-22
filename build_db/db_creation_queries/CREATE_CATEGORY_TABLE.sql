@@ -5,4 +5,4 @@ CREATE TABLE Category
 	PRIMARY KEY (id)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM;
+ENGINE='InnoDB';

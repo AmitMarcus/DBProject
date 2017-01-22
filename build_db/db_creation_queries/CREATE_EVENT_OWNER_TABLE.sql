@@ -10,5 +10,5 @@ CREATE TABLE Event_Owner (
 	CHECK (owner_id > -1)
 )
 COLLATE='utf8_unicode_ci'
-ENGINE=MyISAM
+ENGINE='InnoDB'
 ;
