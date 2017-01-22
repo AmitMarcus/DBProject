@@ -38,6 +38,33 @@ mouse.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
+        .when('/categories_of_most_commented_events/', {
+            templateUrl: 'views/categories_of_most_commented_events.html',
+            controller: 'query',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "categories_of_most_commented_events.complex";
+                }
+            }
+        })
+        .when('/most_sentimental_owners/', {
+            templateUrl: 'views/most_sentimental_owners.html',
+            controller: 'query',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "most_sentimental_owners.complex";
+                }
+            }
+        })
+        .when('/top_places_of_top_category/', {
+            templateUrl: 'views/top_places_of_top_category.html',
+            controller: 'query',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "top_places_of_top_category.complex";
+                }
+            }
+        })
         .when('/event/', {
             templateUrl: 'views/event.html',
             controller: 'event'

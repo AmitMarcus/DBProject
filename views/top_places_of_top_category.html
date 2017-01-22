@@ -1,0 +1,23 @@
+<h2>Top Places of Top Category</h2>
+<h4>10 places that got the highest number of events from the category with the highest number of attendings.</h4>
+<br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Place</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Street</th>
+            <th># of Events</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in data">
+            <td>{{item.place_name}}</td>
+            <td>{{item.country}}</td>
+            <td>{{item.city}}</td>
+            <td>{{item.street}}</td>
+            <td>{{item.number_of_events}}</td>
+        </tr>
+    </tbody>
+</table>

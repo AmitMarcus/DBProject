@@ -9,6 +9,7 @@ import decimal
 import MySQLdb
 import sys
 import time
+#import fb_update
 
 # Special encoder for decimal (jsonify has no support for decimal)
 class MyJSONEncoder(json.JSONEncoder):
@@ -46,7 +47,7 @@ def serveStatic(folder, fileName):
 
 @app.route("/api/query/<query_name>/")
 def query(query_name):
-    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex"):
+    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex", "categories_of_most_commented_events.complex", "most_sentimental_owners.complex", "top_places_of_top_category.complex"):
         sql = open("queries/" + query_name + ".sql").read()
         cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
         cur.execute(sql)
@@ -54,8 +55,9 @@ def query(query_name):
     
     return "404"
 
-@app.route("/api/event/<id>/update/")
-def eventUpdate(id):
+@app.route("/api/event/<event_id>/update/")
+def eventUpdate(event_id):
+#    fb_update.update_event_guests(event_id)
     return "DONE"
 
 @app.route("/api/event/<event_id>/")

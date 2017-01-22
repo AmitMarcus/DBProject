@@ -1,6 +1,6 @@
 SELECT 
     message,
-    DATE_FORMAT(updated_time, '%%e/%%c/%%Y %%H:%%i') AS updated_time
+    DATE_FORMAT(updated_time, '%%e/%%c/%%Y %%H:%%i') AS message_updated_time
 FROM
     Comment
 WHERE
