@@ -9,7 +9,7 @@ SELECT
     Event.name AS Event_Name,
     Category.name AS Event_Category,
     City.name AS City_Name,
-    Event.description,
+    Event_Desc_Search.description AS event_description,
     Event_Time.start_time,
     Event_Time.end_time,
     Event_Guests.attending_count
@@ -22,6 +22,7 @@ FROM
     City,
     Event_Time,
     Event_Guests,
+    Event_Desc_Search,
     (SELECT 
         MONTH(EventTime1.start_time) AS monthOfHighestAtt,
             EventfulCities.id AS cityID,
@@ -54,5 +55,6 @@ WHERE
         AND City.id = maxAttTable.cityID
         AND Event.id = Event_Time.event_id
         AND Event_Guests.event_id = Event.id
+	AND Event.id = Event_Desc_Search.event_id
         AND ABS(MONTH(Event_Time.start_time) - maxAttTable.monthOfHighestAtt) <= 2
 ORDER BY Event_Guests.attending_count DESC;
