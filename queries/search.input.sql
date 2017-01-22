@@ -5,7 +5,7 @@ SELECT
     Country.name AS country,
     City.name AS city,
     Street.name AS street,
-    Event.description AS event_description
+    Event_Desc_Search.description AS event_description
 FROM
     Event,
     Event_Place,
@@ -13,7 +13,8 @@ FROM
     Country,
     City,
     Street,
-    Category
+    Category,
+    Event_Desc_Search
 WHERE
     Event.id = Event_Place.event_id
         AND Event_Place.place_id = Place.id
@@ -21,4 +22,5 @@ WHERE
         AND Street.city_id = City.id
         AND City.country_id = Country.id
         AND Event.category_id = Category.id
-        AND MATCH (Event.description) AGAINST (+%s IN BOOLEAN MODE)
+        AND Event.id = Event_Desc_Search.event_id
+        AND MATCH (Event_Desc_Search.description) AGAINST (+%s IN BOOLEAN MODE)
