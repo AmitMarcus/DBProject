@@ -47,7 +47,7 @@ def serveStatic(folder, fileName):
 
 @app.route("/api/query/<query_name>/")
 def query(query_name):
-    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex", "categories_of_most_commented_events.complex", "most_sentimental_owners.complex", "top_places_of_top_category.complex"):
+    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex", "categories_of_most_commented_events.complex", "most_sentimental_owners.complex", "top_places_of_top_category.complex", "best_streets_USA_UK.complex"):
         sql = open("queries/" + query_name + ".sql").read()
         cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
         cur.execute(sql)
@@ -63,9 +63,10 @@ def eventUpdate(event_id):
 @app.route("/api/event/<event_id>/")
 def event(event_id):
     cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
-    cur.execute("SELECT * FROM Event WHERE id = %s", (event_id,))
+    sql = open("queries/event_details_by_event_id.input.sql").read()
+    cur.execute(sql, (event_id,))
     event = cur.fetchone()
-    return jsonify(event) 
+    return jsonify(event)
 
 @app.route("/api/event/<event_id>/comments/")
 def comments(event_id):
@@ -84,6 +85,18 @@ def addComment(event_id):
     sql = open("queries/new_comment_to_event.input.sql").read()
     cur.execute(sql, (newComment, event_id,))
     return "DONE"
+
+@app.route("/api/nearby_events_by_coordinates/", methods=['POST'])
+def nearbyEvents():
+    json_data = request.get_json(force=True) 
+    latitude = json_data['latitude']
+    longitude = json_data['longitude']
+    
+    cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
+    sql = open("queries/nearby_events_by_coordinates.input.complex.sql").read()
+    cur.execute(sql, (latitude, longitude, latitude,))
+    events = cur.fetchall()
+    return jsonify(events)
 
 @app.route("/api/search/", methods=['POST'])
 def search():

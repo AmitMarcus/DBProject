@@ -1,4 +1,4 @@
-var mouse = angular.module('mouse', ['mouse.controllers', 'ngRoute']);
+var mouse = angular.module('mouse', ['mouse.controllers', 'ngRoute', 'ngMap']);
 
 mouse.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -65,6 +65,15 @@ mouse.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
+        .when('/best_streets_USA_UK/', {
+            templateUrl: 'views/best_streets_USA_UK.html',
+            controller: 'query',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "best_streets_USA_UK.complex";
+                }
+            }
+        })
         .when('/event/', {
             templateUrl: 'views/event.html',
             controller: 'event'
@@ -100,13 +109,31 @@ angular.module('mouse.controllers', [])
                     $location.path("/search");
                 });
         }
+
+        $scope.getMapStyles = function () {
+            return [{"featureType":"all","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"labels.text.fill","stylers":[{"color":"#e5c163"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#c4c4c4"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#e5c163"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21},{"visibility":"on"}]},{"featureType":"poi.business","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#e5c163"},{"lightness":"0"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#e5c163"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#575757"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.stroke","stylers":[{"color":"#2c2c2c"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#999999"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}];
+        }
     })
     .controller('event', function ($scope, $http, $routeParams, ServerService) {
+        $scope.ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         var eventId = $routeParams.id;
         $http.get(ServerService.address + '/api/event/' + eventId + '/')
             .then(function (response) {
                 console.log(response);
                 $scope.event = response.data;
+            
+                if ($scope.event.latitude != null) {
+                    var data = {};
+                    data.latitude = $scope.event.latitude
+                    data.longitude = $scope.event.longitude
+
+                    $http.post(ServerService.address + '/api/nearby_events_by_coordinates/', data)
+                        .then(function (response) {
+                            console.log(response);
+                            $scope.nearby = response.data;
+                        });                    
+                }
+
             });
 
         $http.get(ServerService.address + '/api/event/' + eventId + '/comments/')
@@ -139,11 +166,24 @@ angular.module('mouse.controllers', [])
                         .then(function (response) {
                             console.log(response);
                             $scope.comments = response.data;
+                        
+                            $scope.newComment = "";
 
                             $('#addCommentNotify').modal();
                         });
                 });
         }
+
+        $scope.buyTickets = function (path) {
+            if (path != null) {
+                window.open(path, '_blank');
+            }
+        };
+    
+//        new google.maps.Marker({
+//           position: [ 41.038333333333, 28.986944444444 ],
+//            map: $scope.map
+//        });
     })
     .controller('query', function ($scope, $http, ServerService, $routeParams) {
         $http.get(ServerService.address + '/api/query/' + $routeParams.queryName + '/')

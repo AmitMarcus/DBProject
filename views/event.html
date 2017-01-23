@@ -1,17 +1,65 @@
-<h2>{{event.name}}</h2>
+<h2><img ng-src="icons/{{event.event_category}}.png" title="{{event.event_category}}"> {{event.event_name}}</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>{{event.event_description}}</h4>
+    </div>
+    <div class="col-md-2"><img width=300 ng-src="{{event.cover_source}}">
+    </div>
+</div>
+
 <br>
 <table class="table table-hover">
     <tr>
         <th>Event schedule</th>
-        <td>{{event.start_time}} - {{event.end_time}}</td>
+        <td>{{event.event_start_time}} - {{event.event_end_time}}</td>
     </tr>
     <tr>
-        <th>Category</th>
-        <td>{{event.category_id}}</td>
+        <th>Owner</th>
+        <td>{{event.owner}}</td>
+    </tr>
+    <tr ng-if="event.country != null">
+        <th>Place</th>
+        <td>{{event.country}}, {{event.city}}, {{event.street}}
+    </tr>
+    <tr ng-if="event.country != null">
+        <th>Nearby Events</th>
+        <td>
+            <ng-map center="{{event.latitude}},{{event.longitude}}" zoom="13" styles="{{getMapStyles()}}">
+                <marker position="{{event.latitude}},{{event.longitude}}" icon="{
+                  path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+                  fillColor: 'yellow',
+                  fillOpacity: 0.8,
+                  scale: 0.1,
+                  strokeColor: 'orange',
+                  strokeWeight: 2
+                }"></marker>
+                <marker position="{{mark.latitude}},{{mark.longitude}}" ng-repeat="mark in nearby track by $index" label="{{ABC[$index]}}"></marker>
+            </ng-map>
+            <br>
+            <ol type="A">
+                <li ng-repeat="event in nearby track by $index">
+                    ({{event.event_category}}) <a href="/event/?id={{event.event_id}}">{{event.event_name}}</a> at {{place_name}} ({{event.city}}, {{event.street}})
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Counters</th>
+        <td>
+            <ul>
+                <li> Attending: {{event.attending_count}}</li>
+                <li> Maybe: {{event.maybe_count}}</li>
+                <li> No Reply: {{event.noreply_count}}</li>
+                <li> Declined: {{event.declined_count}}</li>
+                <li> Intersted: {{event.interested_count}}</li>
+            </ul>
+        </td>
     </tr>
 </table>
 
-<button type="button" class="btn btn-primary btn-lg" ng-click="updateEvent()">Update Counters</button>
+<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.event_ticket_uri == null" ng-click="buyTickets(event.event_ticket_uri)">Buy Tickets</button>
+<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateEvent()">Update Counters</button>
 
 
 <h3>Comments</h3>
@@ -45,13 +93,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Info</h4>
+                <h4 class="modal-title" id="myModalLabel">Update Counters</h4>
             </div>
             <div class="modal-body">
                 Update process finished.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -63,13 +111,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">הודעה</h4>
+                <h4 class="modal-title" id="myModalLabel">New Comment</h4>
             </div>
             <div class="modal-body">
                 Comment was added!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
