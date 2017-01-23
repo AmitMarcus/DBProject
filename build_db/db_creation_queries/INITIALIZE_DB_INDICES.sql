@@ -1,6 +1,7 @@
 # PRIMARY keys are automatically indexed by MySQL, we optimize additional fields important to our queries
 
 CREATE INDEX cityCountryIDIndex ON City(country_id);
+CREATE INDEX cityCityName ON City(name);
 
 CREATE INDEX streetCityIDIndext ON Street(city_id);
 
