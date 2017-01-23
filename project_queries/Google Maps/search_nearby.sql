@@ -21,4 +21,5 @@ FROM
 		JOIN
 	Category ON Category.id = Event.category_id
 HAVING distance > 0 AND distance < 4
-ORDER BY distance;
+ORDER BY distance
+LIMIT 26;
