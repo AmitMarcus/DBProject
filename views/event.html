@@ -59,7 +59,7 @@
 </table>
 
 <button type="button" class="btn btn-primary btn-lg" ng-disabled="event.event_ticket_uri == null" ng-click="buyTickets(event.event_ticket_uri)">Buy Tickets</button>
-<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateEvent()">Update Counters</button>
+<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateEvent()">{{updateButtonCaption}}</button>
 
 
 <h3>Comments</h3>

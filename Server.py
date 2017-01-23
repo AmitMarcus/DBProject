@@ -9,7 +9,7 @@ import decimal
 import MySQLdb
 import sys
 import time
-#import fb_update
+import fb_update
 
 # Special encoder for decimal (jsonify has no support for decimal)
 class MyJSONEncoder(json.JSONEncoder):
@@ -57,7 +57,7 @@ def query(query_name):
 
 @app.route("/api/event/<event_id>/update/")
 def eventUpdate(event_id):
-#    fb_update.update_event_guests(event_id)
+    fb_update.update_event_guests(connect_db(), event_id)
     return "DONE"
 
 @app.route("/api/event/<event_id>/")
@@ -134,7 +134,7 @@ if __name__ == "__main__":
         
     while True:
         try:
-            app.run(host='0.0.0.0', port=port, threaded=True, debug=True)
+            app.run(host='0.0.0.0', port=port, threaded=True, debug=False)
         except:
             print "Unexpected error:", sys.exc_info()[0]
             

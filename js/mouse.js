@@ -142,17 +142,32 @@ angular.module('mouse.controllers', [])
                 $scope.comments = response.data;
             });
 
+        $scope.inUpdateProcess = false;
+        $scope.updateButtonCaption = "Update Counters";
         $scope.updateEvent = function () {
+            if ($scope.inUpdateProcess) {
+                return;
+            }
+            
+            $scope.inUpdateProcess = true;
+            $scope.updateButtonCaption = "Please wait...";
+            
             $http.get(ServerService.address + '/api/event/' + eventId + '/update/')
                 .then(function (response) {
                     $http.get(ServerService.address + '/api/event/' + eventId + '/')
                         .then(function (response) {
                             console.log(response);
                             $scope.event = response.data;
+                            $scope.inUpdateProcess = false;
+                            $scope.updateButtonCaption = "Update Counters";
 
                             $('#updateNotify').modal();
                         });
                 });
+        }
+        
+        $scope.isInUpdateProcess = function () {
+            return $scope.inUpdateProcess;
         }
 
         $scope.sendComment = function () {
@@ -179,11 +194,6 @@ angular.module('mouse.controllers', [])
                 window.open(path, '_blank');
             }
         };
-    
-//        new google.maps.Marker({
-//           position: [ 41.038333333333, 28.986944444444 ],
-//            map: $scope.map
-//        });
     })
     .controller('query', function ($scope, $http, ServerService, $routeParams) {
         $http.get(ServerService.address + '/api/query/' + $routeParams.queryName + '/')
