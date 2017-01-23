@@ -33,6 +33,8 @@ def populate_db():
     fb_db.parse_dumped_jsons('Take2/')
     fb_db.parse_dumped_jsons('Take3/')
     fb_db.parse_dumped_jsons('Take4/')
+    fb_db.parse_dumped_jsons('Take5/')
+    fb_db.parse_dumped_jsons('Take6/')
     fb_db.commit_dictionaries_to_db()
 
 

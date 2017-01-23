@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS DbMysql08.Comment;
 
+DROP TABLE IF EXISTS DbMysql08.Event_Desc_Search;
 DROP TABLE IF EXISTS DbMysql08.Event_Place;
 DROP TABLE IF EXISTS DbMysql08.Event_Owner;
 DROP TABLE IF EXISTS DbMysql08.Event_Time;

@@ -233,17 +233,19 @@ def populate_events(cur, con):
             event_start_time, event_end_time, event_updated_time, timezone_id, event_type) \
             in events.iteritems():
 
-        event_fields = 'id, name, is_canceled, description, category_id, ' \
+        event_fields = 'id, name, is_canceled, category_id, ' \
                        'can_guest_invite, cover_source, event_ticket_uri, guest_list_enabled, event_type'
 
         event_guests_fields = 'event_id, attending_count, declined_count, maybe_count, interested_count, noreply_count'
 
         event_time_fields = 'event_id, timezone_id, start_time, end_time, update_time'
 
+        event_desc_fields = 'event_id, description'
+
         # MSQLdb doesn't treat this string as a normal Python SQL string, so all fields are considered %s
         # (this is not a mistake..)
         events_insert_query = 'INSERT INTO Event (' + event_fields + ') ' \
-                                'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+                                'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
         guests_insert_query = 'INSERT INTO Event_Guests (' + event_guests_fields + ') ' \
                                 'VALUES (%s, %s, %s, %s, %s, %s)'
@@ -251,10 +253,12 @@ def populate_events(cur, con):
         time_insert_query = 'INSERT INTO Event_Time (' + event_time_fields + ') ' \
                                 'VALUES (%s, %s, %s, %s, %s)'
 
+        desc_insert_query = 'INSERT INTO Event_Desc_Search (' + event_desc_fields + ') ' \
+                                'VALUES (%s, %s)'
+
         event_parameters = (long(event_id),
                             event_name.encode('UTF-8') if event_name is not None else None,
                             event_is_canceled,
-                            event_description.encode('UTF-8') if event_description is not None else None,
                             category_enum_to_id(event_category),
                             event_can_guests_invite,
                             cover_url.encode('UTF-8') if cover_url is not None else None,
@@ -275,6 +279,9 @@ def populate_events(cur, con):
                                  str(event_end_time),
                                  str(event_updated_time))
 
+        desc_insert_parameters = (long(event_id),
+                                  event_description.encode('UTF-8') if event_description is not None else None)
+
         try:
             cur.execute(events_insert_query, event_parameters)
             batch_size += 1
@@ -294,6 +301,13 @@ def populate_events(cur, con):
             cur.execute(time_insert_query, event_time_parameters)
         except MySQLdb.IntegrityError:
             print("Skipping duplicate Event-Time entry: " + str(event_id))
+        except MySQLdb.OperationalError:
+            continue    # Silently ignore constraint errors, this is the database protecting against bad FB records..
+
+        try:
+            cur.execute(desc_insert_query, desc_insert_parameters)
+        except MySQLdb.IntegrityError:
+            print("Skipping duplicate Event-Desc-Search entry: " + str(event_id))
         except MySQLdb.OperationalError:
             continue    # Silently ignore constraint errors, this is the database protecting against bad FB records..
 
