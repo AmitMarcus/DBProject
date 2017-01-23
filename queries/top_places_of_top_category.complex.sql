@@ -3,6 +3,7 @@ SELECT
     Country.name AS country,
     City.name AS city,
     Street.name AS street,
+    Category.name AS category_with_highest_attedings,
     COUNT(Event.id) AS number_of_events
 FROM
     Place AS Place,
@@ -11,6 +12,7 @@ FROM
     Country,
     Event,
     Event_Place,
+    Category,
     (SELECT 
         Category1.id AS CategoryID,
             SUM(EventGuests1.attending_count) AS Num_Of_Attendings
@@ -30,6 +32,7 @@ WHERE
         AND Street.city_id = City.id
         AND City.country_id = Country.id
         AND Event.category_id = Category_With_Highest_Att.CategoryID
+        AND Event.category_id = Category.id
 GROUP BY Place.id
 ORDER BY (number_of_events) DESC
 LIMIT 10;
