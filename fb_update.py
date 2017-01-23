@@ -38,7 +38,7 @@ def execute_update_query(conn, event_id, event_start_time, event_end_time, event
     times_update_query = 'UPDATE Event_Time ' \
                           'SET start_time=\'%s\', ' \
                           'end_time=\'%s\', ' \
-                          'updated_time=\'%s\'
+                          'updated_time=\'%s\' ' \
                           'WHERE event_id=\'%s\''
 
     event_times_parameters = (str(event_start_time),
