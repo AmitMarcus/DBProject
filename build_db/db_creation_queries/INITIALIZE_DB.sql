@@ -55,7 +55,7 @@ CREATE TABLE City
 (
 	id MEDIUMINT(8) NOT NULL AUTO_INCREMENT,
 	name VARCHAR(38) NOT NULL,
-	country_id MEDIUMINT(8) NOT NULL,
+	country_id SMALLINT(5) NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (country_id) 
         	   REFERENCES  Country(id),
@@ -112,6 +112,7 @@ CREATE TABLE Event (
 	id BIGINT(20) NOT NULL,
 	name VARCHAR(100)  NOT NULL,
 	is_canceled Tinyint(1)  DEFAULT 0,
+	description VARCHAR(700)  DEFAULT NULL,
 	category_id SMALLINT(5)  DEFAULT 999,
 	can_guest_invite Tinyint(1)  DEFAULT 0,
 	cover_source VARCHAR(255)  DEFAULT NULL,
@@ -200,7 +201,7 @@ ENGINE='InnoDB'
 ;
 
 CREATE TABLE Event_Desc_Search (
-	id BIGINT(20) NOT NULL,
+	event_id BIGINT(20) NOT NULL,
 	description VARCHAR(700)  DEFAULT NULL,
 	PRIMARY KEY (id),
 	CHECK (id > -1)

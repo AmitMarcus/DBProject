@@ -1,5 +1,5 @@
 CREATE TABLE Event_Desc_Search (
-	id BIGINT(20) NOT NULL,
+	event_id BIGINT(20) NOT NULL,
 	description VARCHAR(700)  DEFAULT NULL,
 	PRIMARY KEY (id),
 	CHECK (id > -1)
