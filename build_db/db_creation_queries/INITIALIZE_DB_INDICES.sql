@@ -7,7 +7,7 @@ CREATE INDEX streetCityIDIndext ON Street(city_id);
 CREATE INDEX placeStreetIDIndext ON Place(street_id);
 
 CREATE INDEX eventCategoryIDIndex ON Event(category_id);
-CREATE FULLTEXT INDEX FullTextSearchIndex ON Event(description);
+CREATE FULLTEXT INDEX FullTextSearchIndex ON Event_Desc_Search(description);
 
 CREATE INDEX eventGuestsAttendingCountIndex ON Event_Guests(attending_count);
 

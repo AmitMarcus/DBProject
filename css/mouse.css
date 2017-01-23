@@ -8,6 +8,14 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+    color: #a2914f;
+}
+
+a:hover {
+    color: #c6a41a;
+}
+
 .clearfix {
     display: block;
 }
@@ -15,14 +23,14 @@ body {
 .HeaderTexture {
     height: 110px;
     text-align: center;
-    background: #61eaea;
+    background: #073155;
     padding: 10px 0;
 }
 
 .MenuRibbon {
     text-align: center;
     height: 48px;
-    background-color: #4A4849;
+    background-color: #384e61;
 }
 
 .CenteredContent {
@@ -36,13 +44,12 @@ body {
 }
 
 .logoHeader {
-    background: #61eaea;
-    padding: 10px 0;
+    background: #c6a41a;
 }
 
 .logo {
-    width: 100px;
-    height: 90px;
+    width: 564px;
+    height: 115px;
 }
 
 .vcenter {
@@ -52,7 +59,7 @@ body {
 }
 
 .navLinks {
-    background: #337ab7;
+    background: #4a4849;
 }
 
 .navLinks a {
@@ -60,11 +67,13 @@ body {
 }
 
 .navLinks > li > a:hover {
-    background-color: #2e6da4;
+    background-color: #6c6a6b;
+    color: #c6a41a
 }
 
 .navLinks > li > a:focus {
-    background-color: #2e6da4;
+    background-color: #6c6a6b;
+    color: #c6a41a
 }
 
 .cm_content
