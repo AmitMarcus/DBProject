@@ -113,7 +113,6 @@ CREATE TABLE Event (
 	id BIGINT(20) NOT NULL,
 	name VARCHAR(100)  NOT NULL,
 	is_canceled Tinyint(1)  DEFAULT 0,
-	description VARCHAR(700)  DEFAULT NULL,
 	category_id SMALLINT(5)  DEFAULT 999,
 	can_guest_invite Tinyint(1)  DEFAULT 0,
 	cover_source VARCHAR(255)  DEFAULT NULL,
