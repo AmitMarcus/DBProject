@@ -20,7 +20,9 @@ SELECT
             '%%e/%%c/%%Y %%H:%%i') AS event_start_time,
     DATE_FORMAT(Event_Time.end_time,
             '%%e/%%c/%%Y %%H:%%i') AS event_end_time,
-    Category.name AS event_category
+    Category.name AS event_category,
+     DATE_FORMAT(update_time,
+            '%%e/%%c/%%Y %%H:%%i') AS update_time
 FROM
     Event
         LEFT OUTER JOIN

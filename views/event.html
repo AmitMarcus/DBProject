@@ -12,7 +12,7 @@
 <table class="table table-hover">
     <tr>
         <th>Event schedule</th>
-        <td>{{event.event_start_time}} - {{event.event_end_time}}</td>
+        <td>{{event.event_start_time}} - {{event.event_end_time}} (Last updated time: {{event.update_time}})  <button type="button" class="btn btn-primary btn-md" ng-click="updateTimes()">{{updateButtonCaption}}</button></td>
     </tr>
     <tr>
         <th>Owner</th>
@@ -56,10 +56,9 @@
             </ul>
         </td>
     </tr>
-</table>
+ </table>
 
 <button type="button" class="btn btn-primary btn-lg" ng-disabled="event.event_ticket_uri == null" ng-click="buyTickets(event.event_ticket_uri)">Buy Tickets</button>
-<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateEvent()">{{updateButtonCaption}}</button>
 
 
 <h3>Comments</h3>
@@ -93,7 +92,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Update Counters</h4>
+                <h4 class="modal-title" id="myModalLabel">Update Times</h4>
             </div>
             <div class="modal-body">
                 Update process finished.

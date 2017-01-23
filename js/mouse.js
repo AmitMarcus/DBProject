@@ -143,8 +143,8 @@ angular.module('mouse.controllers', [])
             });
 
         $scope.inUpdateProcess = false;
-        $scope.updateButtonCaption = "Update Counters";
-        $scope.updateEvent = function () {
+        $scope.updateButtonCaption = "Update Times";
+        $scope.updateTimes = function () {
             if ($scope.inUpdateProcess) {
                 return;
             }
@@ -159,7 +159,7 @@ angular.module('mouse.controllers', [])
                             console.log(response);
                             $scope.event = response.data;
                             $scope.inUpdateProcess = false;
-                            $scope.updateButtonCaption = "Update Counters";
+                            $scope.updateButtonCaption = "Update Times";
 
                             $('#updateNotify').modal();
                         });

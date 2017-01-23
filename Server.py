@@ -57,7 +57,8 @@ def query(query_name):
 
 @app.route("/api/event/<event_id>/update/")
 def eventUpdate(event_id):
-    fb_update.update_event_guests(connect_db(), event_id)
+    if not fb_update.update_event_times(connect_db(), event_id):
+        print "bla"
     return "DONE"
 
 @app.route("/api/event/<event_id>/")

@@ -14,10 +14,11 @@ FROM
         Event AS Event2, Event_Time AS EventTime2, (SELECT 
         Cat1.id AS CategoryID, MAX(EventTime1.start_time) AS maxDate
     FROM
-        Category AS Cat1, Event AS Event1, Event_Time AS EventTime1
+        Category AS Cat1, Event AS Event1, Event_Time AS EventTime1, Event_Place
     WHERE
         Cat1.id = Event1.category_id
             AND Event1.id = EventTime1.event_id
+            AND Event1.id = Event_Place.event_id
     GROUP BY CategoryID
     ORDER BY maxDate DESC
     LIMIT 8) AS CatMaxDateTable
@@ -30,4 +31,4 @@ WHERE
     Event.id = EventIDS.Newest_Event_ID
         AND Event.category_id = Category.id
         AND Event.id = Event_Time.event_id
-        AND Event.id = Event_Desc_Search.event_id;
+        AND Event.id = Event_Desc_Search.event_id

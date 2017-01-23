@@ -10,19 +10,21 @@ import facebook
 app_token = '190441714759199|QdoMmLvHYEUzSeeLyPK4Awg6Zv4'
 
 def fetch_updated_event_times_data(event_id):
-
+    
+    event = None
+    
     try:
         graph = facebook.GraphAPI(access_token=app_token, version='2.2')
 
         event = graph.get_objects(ids=[event_id],
-                                           fields='id, start_time, end_time, update time')
+                                           fields='id, start_time, end_time, updated_time')
     except facebook.GraphAPIError:
         print ('Facebook-graph error fetching updated event data. Event_id: ' + str(event_id))
         tb = traceback.format_exc()
         print(tb)
 
     if (event is None) or (len(event) == 0):
-        return None, None, None, None, None
+        return None, None, None
 
     event_data = event[event_id]
     event_start_time = event_data.get('start_time',
@@ -38,7 +40,7 @@ def execute_update_query(conn, event_id, event_start_time, event_end_time, event
     times_update_query = 'UPDATE Event_Time ' \
                           'SET start_time=\'%s\', ' \
                           'end_time=\'%s\', ' \
-                          'updated_time=\'%s\' ' \
+                          'update_time=\'%s\' ' \
                           'WHERE event_id=\'%s\''
 
     event_times_parameters = (str(event_start_time),
@@ -56,7 +58,7 @@ def execute_update_query(conn, event_id, event_start_time, event_end_time, event
     except MySQLdb.OperationalError:
         pass  # Silently ignore constraint errors, this is the database protecting against bad FB records..
     except Exception:
-        con.rollback()  # Any other exception should be rolled back to protect DB integrity
+        conn.rollback()  # Any other exception should be rolled back to protect DB integrity
 
 def update_event_times(conn, event_id):
     """ Fetches the updated event-times details using the facebook graph-api (start, end, updated times),
