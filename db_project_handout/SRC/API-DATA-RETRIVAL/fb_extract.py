@@ -133,8 +133,8 @@ if __name__ == '__main__':
 
     if len(sys.argv) <= 1:
         print('Incorrect Usage. Try:')
-        print('python db_extract download_data // Harvests selected events from facebook to local Json files')
-        print('python db_extract populate_db   // Populates DB with data stored in Json files')
+        print('python fb_extract download_data // Harvests selected events from facebook to local Json files')
+        print('python fb_extract populate_db   // Populates DB with data stored in Json files')
         exit(1)
 
     cmd = sys.argv[1]
@@ -145,6 +145,6 @@ if __name__ == '__main__':
         populate_db()
     else:
         print('Incorrect Usage. Try:')
-        print('python db_extract download_data // Harvests selected events from facebook to local Json files')
-        print('python db_extract populate_db   // Populates DB with data stored in Json files')
+        print('python fb_extract download_data // Harvests selected events from facebook to local Json files')
+        print('python fb_extract populate_db   // Populates DB with data stored in Json files')
         exit(1)

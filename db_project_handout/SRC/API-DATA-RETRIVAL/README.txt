@@ -3,8 +3,8 @@ MYSQL DBMS..
 
 Usage:
 
-python db_extract download_data // Harvests selected events from facebook to local Json files
-python db_extract populate_db   // Populates DB with data stored in Json files
+python fb_extract download_data // Harvests selected events from facebook to local Json files
+python fb_extract populate_db   // Populates DB with data stored in Json files
 
 - Please run using Python 2.7 - 
 The library uses the following dependencies:
