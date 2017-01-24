@@ -1,3 +1,7 @@
+#Full Text Search Query – Most Sentimental Owners – 10 owners that got the highest number of 
+#events that has the word "Love" in their description.
+
+
 SELECT 
     Owner.name AS owner_name,
     COUNT(Event.id) AS number_of_events
