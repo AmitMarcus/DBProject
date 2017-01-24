@@ -16,6 +16,8 @@ from fb_config import app_token
 from fb_config import database_hostname
 import fb_populate as fb_db
 
+""" A tool for fetching data from facebook and populating the database.. """
+""" See running instructions on main functions at bottom of this module"""
 
 def populate_db():
     """ Populates database from Json files downloaded """
