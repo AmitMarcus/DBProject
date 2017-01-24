@@ -1,3 +1,8 @@
+
+#Hottest City – 10 events with the closest start date to the current 
+#date (in the future) in the city that has the highest number of events.
+
+
 SELECT 
     City.name AS city_name,
     Event.id AS event_id,
