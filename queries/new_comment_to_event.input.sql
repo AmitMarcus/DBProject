@@ -1,4 +1,4 @@
-#Insert new comment according to message and event_id as inputs to our Comment table
+#Insert new comment according to message and event_id as inputs into our Comment table
 
 
 
