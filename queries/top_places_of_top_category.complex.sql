@@ -1,3 +1,6 @@
+#10 places that got the highest number of events from the category with the highest number of attendings.
+
+
 SELECT 
     Place.name AS place_name,
     Country.name AS country,
