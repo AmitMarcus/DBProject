@@ -122,12 +122,10 @@ def nearbyEvents():
 @app.route("/api/search/", methods=['POST'])
 def search():
     json_data = request.get_json(force=True) 
-    searchString = json_data['searchString']
+    searchString = json_data['searchString'].encode('utf-8', 'ignore')
 
     cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
     sql = open("queries/search.input.sql").read()
-    print searchString
-    print sql
     cur.execute(sql, (searchString,))
     event = cur.fetchall()
     return jsonify(event)
