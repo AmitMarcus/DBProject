@@ -1,0 +1,19 @@
+<h2>Most Popular Owners</h2>
+<h4>10 owners that their events has the highest number of comments together among the 20 owners that their events has the highest number of attendings together.</h4>
+<br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Owner Name</th>
+            <th>Attendings</th>
+            <th># of Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="owner in data">
+            <td>{{owner.owner_name}}</td>
+            <td>{{owner.owner_event_attendings}}</td>
+            <td>{{owner.number_of_comments}}</td>
+        </tr>
+    </tbody>
+</table>

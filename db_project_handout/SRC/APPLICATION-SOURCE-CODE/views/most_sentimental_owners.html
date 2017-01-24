@@ -1,0 +1,17 @@
+<h2>Most Sentimental Owners</h2>
+<h4>10 owners that got the highest number of events that has the word "Love" in their description.</h4>
+<br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Owner Name</th>
+            <th># of Events with "Love"</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="owner in data">
+            <td>{{owner.owner_name}}</td>
+            <td>{{owner.number_of_events}}</td>
+        </tr>
+    </tbody>
+</table>
