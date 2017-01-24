@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS DbMysql08.GlobalMessage;
+
 DROP TABLE IF EXISTS DbMysql08.Comment;
 
 DROP TABLE IF EXISTS DbMysql08.Event_Desc_Search;
@@ -222,6 +224,23 @@ CREATE TABLE Comment
 
 	CHECK (updated_time <= NOW()),
 	CHECK (id > -1)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE='InnoDB'
+;
+
+CREATE TABLE GlobalMessage 
+(
+	id BIGINT(20) NOT NULL AUTO_INCREMENT,
+	message VARCHAR(250) NOT NULL,
+	fullname VARCHAR(27) NOT NULL,
+	post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	city_id MEDIUMINT(8) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (city_id)
+		REFERENCES City(id),
+	CHECK (id > -1),
+	CHECK (city_id > -1)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE='InnoDB'
