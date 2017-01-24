@@ -1,3 +1,5 @@
+#returns the details of the event with id equals to the input event's id.
+
 SELECT 
     Event.id AS event_id,
     Event.name AS event_name,
