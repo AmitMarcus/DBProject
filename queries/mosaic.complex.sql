@@ -1,3 +1,6 @@
+#Mosaic Query : The newest event for the 8 categories that have the newest events (newest in start_time).
+
+
 SELECT 
     Event.id AS event_id,
     Event.name AS event_name,
