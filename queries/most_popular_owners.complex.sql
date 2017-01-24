@@ -1,3 +1,7 @@
+#Most Popular Owners – 10 owners that their events has the highest number of comments together 
+#among the 20 owners that their events has the highest number of attendings together.
+
+
 SELECT 
     Owner.id AS owner_id,
     Owner.name AS owner_name,
