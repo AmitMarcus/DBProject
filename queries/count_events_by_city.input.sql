@@ -1,3 +1,5 @@
+#returns the number of events that occurs in the city with id equals to the input city's id.
+
 SELECT 
     City.name AS city,
     Country.name AS country,
