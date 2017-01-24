@@ -23,7 +23,7 @@ categories = {
                 'MUSIC_EVENT': (11, 'Music'),
                 'DANCE_EVENT': (12, 'Dancing'),
                 'NIGHTLIFE': (13, 'Nightlife'),
-                'THEATER_EVENT': (14, 'Threater'),
+                'THEATER_EVENT': (14, 'Theater'),
                 'DINING_EVENT': (15, 'Dining'),
                 'FOOD_TASTING': (16, 'Food'),
                 'CONFERENCE_EVENT': (17, 'Conference'),

@@ -29,6 +29,8 @@ def populate_db():
     # We support insertion of multiple download processes at once.
     # Just specify their paths here.
     # (We expect under each path to find: "data.json", and a folder called "COMMENTS" with comment json files..
+    # Note: These sub directories were created manually after each download.. This may change depending
+    # on how much data you want to download and insert into the database
     fb_db.parse_dumped_jsons('Take1/')
     fb_db.parse_dumped_jsons('Take2/')
     fb_db.parse_dumped_jsons('Take3/')
