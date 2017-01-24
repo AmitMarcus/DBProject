@@ -57,7 +57,7 @@ def query(query_name):
 
 @app.route("/api/event/<event_id>/update/")
 def eventUpdate(event_id):
-    if not fb_update.update_event_counters(connect_db(), event_id):
+    if not fb_update.update_event_guests(connect_db(), event_id):
         print "bla"
     return "DONE"
 
@@ -93,6 +93,18 @@ def addComment(event_id):
     cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
     sql = open("queries/new_comment_to_event.input.sql").read()
     cur.execute(sql, (newComment, event_id,))
+    return "DONE"
+
+@app.route("/api/message/add/", methods=['POST'])
+def addMsg():
+    json_data = request.get_json(force=True) 
+    message = json_data['message']
+    fullname = json_data['fullname']
+    city_id = json_data['city_id']
+    
+    cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
+    sql = open("queries/new_message.input.sql").read()
+    cur.execute(sql, (message, fullname, city_id,))
     return "DONE"
 
 @app.route("/api/nearby_events_by_coordinates/", methods=['POST'])

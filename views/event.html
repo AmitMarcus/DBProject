@@ -12,7 +12,7 @@
 <table class="table table-hover">
     <tr>
         <th>Event schedule</th>
-        <td>{{event.event_start_time}} - {{event.event_end_time}}</td>
+        <td ng-if="event.event_start_time != null">{{event.event_start_time}} - {{event.event_end_time}} ({{event.timezone}})</td>
     </tr>
     <tr>
         <th>Owner</th>
@@ -59,7 +59,7 @@
 </table>
 
 <button type="button" class="btn btn-primary btn-lg" ng-disabled="event.event_ticket_uri == null" ng-click="buyTickets(event.event_ticket_uri)">Buy Tickets</button>
-<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateEvent()">{{updateButtonCaption}}</button>
+<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateCounters()">{{updateButtonCaption}}</button>
 
 
 <h3>Comments</h3>

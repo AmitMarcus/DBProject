@@ -22,7 +22,8 @@ SELECT
             '%%e/%%c/%%Y %%H:%%i') AS event_end_time,
     Category.name AS event_category,
      DATE_FORMAT(update_time,
-            '%%e/%%c/%%Y %%H:%%i') AS update_time
+            '%%e/%%c/%%Y %%H:%%i') AS update_time,
+	Timezone.timezone as timezone
 FROM
     Event
         LEFT OUTER JOIN
@@ -43,7 +44,9 @@ FROM
         LEFT OUTER JOIN
     Event_Guests ON Event.id = Event_Guests.event_id
         LEFT OUTER JOIN
-    Event_Time ON Event.id = Event_Time.event_id,
+    Event_Time ON Event.id = Event_Time.event_id
+            LEFT OUTER JOIN
+    Timezone ON Timezone.id = Event_Time.timezone_id,
     Event_Desc_Search,
     Event_Owner,
     Owner,

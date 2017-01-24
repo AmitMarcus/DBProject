@@ -108,12 +108,16 @@ angular.module('mouse.controllers', [])
             .then(function (response) {
                 console.log(response);
                 $scope.cities = response.data;
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
             });
     
         $http.get(ServerService.address + '/api/query/message.simple/')
             .then(function (response) {
                 console.log(response);
                 $scope.message = response.data[0];
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
             });
     
         $scope.searchString = "";
@@ -128,14 +132,42 @@ angular.module('mouse.controllers', [])
                     console.log(response);
                     $scope.searchResults = response.data;
                     $location.path("/search");
+                }, function errorCallback(response) {
+                    alert("There is a problem with the server. Try again later.");
                 });
         }
         
+        $scope.data = {};
         $scope.sendMsg = function (data) {
-            $http.post(ServerService.address + '/api/message/add/', data)
+            if (!("message" in $scope.data) || $scope.data.message == "") {
+                $scope.errorMsg = "No message in new message!";
+                $('#error').modal();
+                return;
+            }
+            if (!("fullname" in $scope.data) || $scope.data.fullname == "") {
+                $scope.errorMsg = "No fullname in new message!";
+                $('#error').modal();
+                return;
+            }
+            if (!("city_id" in $scope.data) || $scope.data.city_id == "") {
+                $scope.errorMsg = "No city in new message!";
+                $('#error').modal();
+                return;
+            }
+            console.log("Add msg..");
+            $http.post(ServerService.address + '/api/message/add/', $scope.data)
                 .then(function (response) {
-                    console.log(response);
-                    $scope.message = data;
+                    $http.get(ServerService.address + '/api/query/message.simple/')
+                        .then(function (response) {
+                            console.log(response);
+                            $scope.message = response.data[0];
+                            $scope.data = {};
+                            $('#addMsgNotify').modal();
+                        }, function errorCallback(response) {
+                            alert("There is a problem with the server. Try again later.");
+                        });
+                }, function errorCallback(response) {
+                    alert("There is a problem with the server. Try again later.");
                 });
         }
 
@@ -160,9 +192,12 @@ angular.module('mouse.controllers', [])
                         .then(function (response) {
                             console.log(response);
                             $scope.nearby = response.data;
-                        });                    
+                        }, function errorCallback(response) {
+                            alert("There is a problem with the server. Try again later.");
+                        });                   
                 }
-
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
             });
 
         $http.get(ServerService.address + '/api/event/' + eventId + '/comments/')
@@ -191,7 +226,11 @@ angular.module('mouse.controllers', [])
                             $scope.updateButtonCaption = "Update Counters";
 
                             $('#updateNotify').modal();
+                        }, function errorCallback(response) {
+                            alert("There is a problem with the server. Try again later.");
                         });
+                }, function errorCallback(response) {
+                    alert("There is a problem with the server. Try again later.");
                 });
         }
         
@@ -214,7 +253,11 @@ angular.module('mouse.controllers', [])
                             $scope.newComment = "";
 
                             $('#addCommentNotify').modal();
+                        }, function errorCallback(response) {
+                            alert("There is a problem with the server. Try again later.");
                         });
+                }, function errorCallback(response) {
+                    alert("There is a problem with the server. Try again later.");
                 });
         }
 
@@ -229,6 +272,8 @@ angular.module('mouse.controllers', [])
             .then(function (response) {
                 console.log(response);
                 $scope.data = response.data;
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
             });
     })
     .controller('countEventsByCity', function ($scope, $http, ServerService, $routeParams) {
@@ -236,6 +281,8 @@ angular.module('mouse.controllers', [])
             .then(function (response) {
                 console.log(response);
                 $scope.cities = response.data;
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
             });
     
         $scope.chooseCity = function() {
@@ -243,6 +290,8 @@ angular.module('mouse.controllers', [])
             .then(function (response) {
                 console.log(response);
                 $scope.chosenCity = response.data;
-            });         
+            }, function errorCallback(response) {
+                alert("There is a problem with the server. Try again later.");
+            });        
         }
     });;
