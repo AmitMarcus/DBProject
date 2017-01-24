@@ -20,3 +20,4 @@ CREATE INDEX eventPlacePlaceIDIndex ON Event_Place(place_id);
 
 CREATE INDEX eventOwnerOwnerIDIndex ON Event_Owner(owner_id);
 
+CREATE INDEX globalMsgPostTimeIndex ON GlobalMessage(post_time);
