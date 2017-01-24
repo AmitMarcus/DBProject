@@ -1,3 +1,5 @@
+#returns the details of the newest message that was posed "To the world" from our website into our GlobalMessage table.
+
 SELECT 
     message,
     fullname,
