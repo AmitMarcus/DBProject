@@ -1,3 +1,6 @@
+
+--The categories of the 10 events with the highest number of comments
+
 SELECT DISTINCT
     Category.name AS category
 FROM
