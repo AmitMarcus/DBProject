@@ -56,6 +56,15 @@ mouse.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
+        .when('/count_events_by_city/', {
+            templateUrl: 'views/count_events_by_city.html',
+            controller: 'countEventsByCity',
+            resolve: {
+                queryName: function ($route) {
+                    $route.current.params.queryName = "count_events_by_city.complex";
+                }
+            }
+        })
         .when('/top_places_of_top_category/', {
             templateUrl: 'views/top_places_of_top_category.html',
             controller: 'query',
@@ -95,6 +104,18 @@ mouse.factory('ServerService', ['$location', function ($location) {
 
 angular.module('mouse.controllers', [])
     .controller('main', function ($scope, $http, $location, ServerService) {
+        $http.get(ServerService.address + '/api/query/cities.simple/')
+            .then(function (response) {
+                console.log(response);
+                $scope.cities = response.data;
+            });
+    
+        $http.get(ServerService.address + '/api/query/message.simple/')
+            .then(function (response) {
+                console.log(response);
+                $scope.message = response.data[0];
+            });
+    
         $scope.searchString = "";
 
         $scope.search = function () {
@@ -107,6 +128,14 @@ angular.module('mouse.controllers', [])
                     console.log(response);
                     $scope.searchResults = response.data;
                     $location.path("/search");
+                });
+        }
+        
+        $scope.sendMsg = function (data) {
+            $http.post(ServerService.address + '/api/message/add/', data)
+                .then(function (response) {
+                    console.log(response);
+                    $scope.message = data;
                 });
         }
 
@@ -143,8 +172,8 @@ angular.module('mouse.controllers', [])
             });
 
         $scope.inUpdateProcess = false;
-        $scope.updateButtonCaption = "Update Times";
-        $scope.updateTimes = function () {
+        $scope.updateButtonCaption = "Update Counters";
+        $scope.updateCounters = function () {
             if ($scope.inUpdateProcess) {
                 return;
             }
@@ -159,7 +188,7 @@ angular.module('mouse.controllers', [])
                             console.log(response);
                             $scope.event = response.data;
                             $scope.inUpdateProcess = false;
-                            $scope.updateButtonCaption = "Update Times";
+                            $scope.updateButtonCaption = "Update Counters";
 
                             $('#updateNotify').modal();
                         });
@@ -201,4 +230,19 @@ angular.module('mouse.controllers', [])
                 console.log(response);
                 $scope.data = response.data;
             });
-    });
+    })
+    .controller('countEventsByCity', function ($scope, $http, ServerService, $routeParams) {
+        $http.get(ServerService.address + '/api/query/cities.simple/')
+            .then(function (response) {
+                console.log(response);
+                $scope.cities = response.data;
+            });
+    
+        $scope.chooseCity = function() {
+           $http.get(ServerService.address + '/api/count_events_by_city/' + $scope.chosenCityId + '/')
+            .then(function (response) {
+                console.log(response);
+                $scope.chosenCity = response.data;
+            });         
+        }
+    });;

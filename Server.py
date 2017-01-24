@@ -47,7 +47,7 @@ def serveStatic(folder, fileName):
 
 @app.route("/api/query/<query_name>/")
 def query(query_name):
-    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex", "categories_of_most_commented_events.complex", "most_sentimental_owners.complex", "top_places_of_top_category.complex", "best_streets_USA_UK.complex"):
+    if query_name in ("hottest_season.complex", "hottest_city.complex", "mosaic.complex", "most_popular_owners.complex", "categories_of_most_commented_events.complex", "most_sentimental_owners.complex", "top_places_of_top_category.complex", "best_streets_USA_UK.complex", "cities.simple", "message.simple"):
         sql = open("queries/" + query_name + ".sql").read()
         cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
         cur.execute(sql)
@@ -57,7 +57,7 @@ def query(query_name):
 
 @app.route("/api/event/<event_id>/update/")
 def eventUpdate(event_id):
-    if not fb_update.update_event_times(connect_db(), event_id):
+    if not fb_update.update_event_counters(connect_db(), event_id):
         print "bla"
     return "DONE"
 
@@ -76,6 +76,14 @@ def comments(event_id):
     cur.execute(sql, (event_id,))
     event = cur.fetchall()
     return jsonify(event)
+
+@app.route("/api/count_events_by_city/<city_id>/")
+def countEventsByCity(city_id):
+    cur = connect_db().cursor(MySQLdb.cursors.DictCursor)
+    sql = open("queries/count_events_by_city.input.sql").read()
+    cur.execute(sql, (city_id,))
+    eventsNumber = cur.fetchone()
+    return jsonify(eventsNumber)
 
 @app.route("/api/event/<event_id>/comments/add/", methods=['POST'])
 def addComment(event_id):
