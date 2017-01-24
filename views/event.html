@@ -50,16 +50,24 @@
             <ul>
                 <li> Attending: {{event.attending_count}}</li>
                 <li> Maybe: {{event.maybe_count}}</li>
-                <li> No Reply: {{event.noreply_count}}</li>
                 <li> Declined: {{event.declined_count}}</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Updatable Counters</th>
+        <td>
+            <ul>
+                <li> No Reply: {{event.noreply_count}}</li>
                 <li> Intersted: {{event.interested_count}}</li>
             </ul>
+            <button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateCounters()">{{updateButtonCaption}}</button>
         </td>
     </tr>
 </table>
 
 <button type="button" class="btn btn-primary btn-lg" ng-disabled="event.event_ticket_uri == null" ng-click="buyTickets(event.event_ticket_uri)">Buy Tickets</button>
-<button type="button" class="btn btn-primary btn-lg" ng-disabled="event.attending_count == null" ng-click="updateCounters()">{{updateButtonCaption}}</button>
+
 
 
 <h3>Comments</h3>
