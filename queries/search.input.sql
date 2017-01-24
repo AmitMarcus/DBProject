@@ -1,3 +1,7 @@
+#Returns details of event (from some tables) that has the input word as a word
+#in it's description
+
+
 SELECT 
     Event.id AS event_id,
     Event.name AS event_name,
